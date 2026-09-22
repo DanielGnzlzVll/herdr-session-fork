@@ -17,7 +17,11 @@ new_cfg 'onboarding = false'
 cfg=$(cat "$SESSION_FORK_CONFIG")
 assert_eq "$rc" "0" "setup succeeds on a clean config"
 assert_contains "$cfg" 'key = "prefix+shift+v"' "the vertical binding is written"
-assert_contains "$cfg" 'key = "prefix+shift+minus"' "the horizontal binding is written"
+assert_contains "$cfg" 'key = "prefix+_"' "the horizontal binding is written"
+# herdr parses "shift+minus" happily and registers it as shift + the `-`
+# keycode -- a chord the terminal never sends, because that keystroke arrives
+# as the character `_`. The binding then silently never fires.
+assert_not_contains "$cfg" "shift+minus" "the unreachable shift+minus chord is never written"
 assert_contains "$cfg" 'command = "danielgnzlzvll.session-fork.clone-vertical"' "the vertical action is targeted"
 assert_contains "$cfg" 'onboarding = false' "existing config is preserved"
 assert_eq "$(cat "$SESSION_FORK_CONFIG.session-fork-backup")" "onboarding = false" "the original is backed up"
