@@ -65,7 +65,7 @@ fi
 # leave it alone and say so. Commented-out lines do not count: zoetrope ships
 # a commented prefix+shift+v, and that is not a conflict.
 without_ours=$(strip_block "$cfg")
-for key in "prefix+shift+v" "prefix+shift+minus"; do
+for key in "prefix+shift+v" "prefix+_"; do
   # `+` is an ERE metacharacter, so the key has to be escaped to match
   # literally. TOML accepts both quote styles for the value.
   key_re=${key//+/\\+}
@@ -78,6 +78,10 @@ done
 
 backup_once
 
+# The horizontal key is `prefix+_`, not `prefix+shift+minus`. herdr accepts the
+# latter and registers it as shift + the `-` keycode, but that keystroke reaches
+# the terminal as the character `_` with no shift flag, so the chord never
+# arrives and the binding silently never fires.
 {
   printf '%s\n' "$without_ours"
   cat <<BLOCK
@@ -89,7 +93,7 @@ command = "danielgnzlzvll.session-fork.clone-vertical"
 description = "session-fork: fork this session into a pane on the right"
 
 [[keys.command]]
-key = "prefix+shift+minus"
+key = "prefix+_"
 type = "plugin_action"
 command = "danielgnzlzvll.session-fork.clone-horizontal"
 description = "session-fork: fork this session into a pane below"

@@ -24,10 +24,16 @@ bind. `remove-keys` deletes exactly that block.
 | Key | What happens |
 |---|---|
 | `prefix+shift+v` | Fork opens in a pane to the **right** |
-| `prefix+shift+minus` | Fork opens in a pane **below** |
+| `prefix+_` | Fork opens in a pane **below** |
 
 These mirror herdr's own `split_vertical` (`prefix+v`) and `split_horizontal`
-(`prefix+minus`): shift means "split, but put a fork of this session in it".
+(`prefix+minus`): hold shift while you press the split key, and you get a split
+with a fork of this session in it.
+
+`prefix+_` rather than `prefix+shift+minus` because that keystroke reaches the
+terminal as the character `_`. herdr accepts `shift+minus` and registers it as
+shift plus the `-` keycode — a chord the terminal never sends — so it would
+parse without complaint and then never fire.
 
 To bind your own keys instead, point a `[[keys.command]]` at the action:
 
