@@ -16,7 +16,7 @@ stub_setup() {
 
   cat >"$STUB_DIR/bin/herdr" <<'STUB'
 #!/usr/bin/env bash
-printf '%s\n' "$*" >>"$STUB_LOG"
+{ printf 'ARGC=%d ' "$#"; printf '<%s>' "$@"; printf '\n'; } >>"$STUB_LOG"
 key="${1:-} ${2:-}"
 safe=${key// /_}
 exit_file="$STUB_DIR/exit_$safe"

@@ -22,7 +22,7 @@ export HERDR_PLUGIN_CONTEXT_JSON='{"focused_pane_id":"w1:p1"}'
 out=$("$RESOLVE"); rc=$?
 assert_eq "$rc" "0" "resolves a claude pane"
 assert_eq "$out" "$(printf 'w1:p1\tclaude\tabc-123\t/home/d/git/repo\tFixing the parser')" "tab-separated fields"
-assert_contains "$(stub_calls)" "pane get w1:p1" "asks herdr about the focused pane"
+assert_contains "$(stub_calls)" "<pane><get><w1:p1>" "asks herdr about the focused pane"
 stub_teardown
 
 # --- Review Focus 1: spaces in cwd and title --------------------------------
