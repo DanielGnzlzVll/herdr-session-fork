@@ -18,3 +18,17 @@ title = "Fork session into a pane below"
 description = "Fork the focused agent session and open it under this pane, sharing the same working directory."
 contexts = ["pane"]
 command = ["bash", "scripts/clone.sh", "down"]
+
+[[actions]]
+id = "setup-keys"
+title = "Install the default keybindings"
+description = "Bind prefix+shift+v and prefix+shift+minus to the two fork actions. One managed block in your herdr config, backed up first."
+contexts = ["workspace"]
+command = ["bash", "scripts/keys.sh", "setup"]
+
+[[actions]]
+id = "remove-keys"
+title = "Remove the default keybindings"
+description = "Delete the block setup-keys wrote."
+contexts = ["workspace"]
+command = ["bash", "scripts/keys.sh", "remove"]
