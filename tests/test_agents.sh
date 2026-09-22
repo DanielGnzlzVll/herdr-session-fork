@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -uo pipefail
 . "$(dirname "$0")/lib.sh"
+# shellcheck source=../scripts/agents.sh
 . "$REPO_ROOT/scripts/agents.sh"
 
 out=$(fork_args claude 1234-abcd); rc=$?
